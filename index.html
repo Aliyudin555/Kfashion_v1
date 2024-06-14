@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KFashion</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="shortcut icon" href="/image/Kfasihonlogo.png" type="image/x-icon">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/css/bootstrap.min.css" />
+ 
+    <script src="https://unpkg.com/feather-icons"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <script src="src/app.js" async></script>
+
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+  </head>
+<body>
+  <nav class="navbar navbar-expand-lg bg-body-yellow d-flex justify-between align-items-center "  id="navbar" x-data >
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#"><img src="/image/Kfasihonlogo.png" alt=""></a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="#home">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#products">Produk</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#about">tentang kami</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#kontak">Kontak</a>
+          </li>
+        </ul>
+        <form class="d-flex" role="search" id="search-form">
+          <input class="form-control me-2" type="search" placeholder="cari produk" aria-label="Search" id="search-input">
+          <button class="btn btn-outline-success me-3" type="submit">Cari</button>
+         </form>
+        <div class="navbar-extra">
+         <a href="#" id="search-button"><i data-feather="search"></i></a>
+          <a href="#" id="shopping-cart-button"><img class="keranjang" src="/image/keranjang.png" alt="kerjanjang"></i>
+          <span class="quantitiy-badge" x-show="$store.cart.quantitiy" x-text="$store.cart.quantitiy"></span>
+  </a>
+    <a href="#" id="hamburger-menu"><i data-feather="menu"></i></a>
+  </div>
+
+        <div class="shopping-cart">
+          <template x-for="(item, index) in $store.cart.items" x-keys="index">
+          <div class="cart-item">
+            <img :src="`img/${item.img}`" :alt="item.name">
+            <div class="item-detail">
+              <h3 x-text="item.name"></h3>
+              <div class="item-price">
+                <span x-text="rupiah(item.price)"></span> &times;
+                <button id="remove" @click="$store.cart.remove(item.id)">&minus;</button>
+                <span x-text="item.quantitiy"></span>
+                <button id="add" @click="$store.cart.add(item)">&plus;</button>&equals;
+                <span x-text="rupiah(item.total)"></span>
+              </div>
+            </div>
+          </div>
+          </template>
+          <h4 x-show="!$store.cart.items.length" style="margin-top: 1rem;">Belum ada isinya</h4>
+          <h4 x-show="$store.cart.items.length">Total :<span x-text="rupiah($store.cart.total)"></span></h4>
+          <div class="form-container">
+            <form action="" id="checkoutForm" x-show="$store.cart.items.length">
+              <input type="hidden" name="items" x-model="JSON.stringify($store.cart.items)">
+              <input type="hidden" name="total" x-model="$store.cart.total">
+              <h5>Customer Detail</h5>
+    
+              <label for="name">
+                <span>Name</span>
+                <input type="text" name="name" id="name">
+              </label>
+    
+              <label for="email">
+                <span>Email </span>
+                <input type="email" name="email" id="email">
+              </label>
+    
+              <label for="phone">
+                <span>Phone</span>
+                <input type="number" name="phone" id="phone" autocomplete="off">
+              </label>
+    
+              <button class="checkout-button disabled" type="submit" id="checkout-button" value="checkout">Checkout</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  
+  </nav>
+ <section class="container-xl" id="home">
+  <br><br><br><br>
+    <div id="carouselExampleCaptions" class="carousel slide">
+        <div class="carousel-indicators">
+          <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+          <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
+          <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
+        </div>
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <img src="/image/contoh.png" class="d-block w-100" alt="...">
+          
+          </div>
+          <div class="carousel-item">
+            <img src="/image/contoh.png" class="d-block w-100" alt="...">
+        
+          </div>
+          <div class="carousel-item">
+            <img  src="/image/contoh.png" class="d-block w-100" alt="...">
+          </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
+      </div>
+ </section>
+
+ <section class="container-xxl products" id="products" x-data="products" >
+<!-- Images Filter Buttons Section -->
+<div class="row mt-5" id="filter-buttons" >
+  <div class="col-10 " style="margin: 0% 10%;">
+    <button class="btn mb-2 me-1 active" data-filter="all">Semua</button>
+    <button id="p" class="btn mb-2 mx-1" data-filter="pria">Pria</button>
+    <button id="w" class="btn mb-2 mx-1" data-filter="wanita">Wanita</button>
+    <button id="a" class="btn mb-2 mx-1" data-filter="anak">Anak</button>
+  </div>
+</div>
+<!-- row px-2 mt-4 gap-3 -->
+<div class="container-xl row " id="filterable-cards" >
+  <template x-for="(item, index) in items" x-bind:key="index">
+ 
+    <div class="product-card" :data-filter="item.data" >
+      <div class="product-icons">
+        <a href="#" @click.prevent="$store.cart.add(item)">
+          <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <use href="img/feather-sprite.svg#shopping-cart" />
+          </svg>
+        </a>
+        <a href="#" class="item-detail-button" @click.prevent="showItemDetailModal(item)">
+          <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <use href="img/feather-sprite.svg#eye" />
+          </svg>
+        </a>
+      </div>
+      <div class="card p-0">
+        <img :src="`img/${item.img}`" :alt="item.name">
+      </div>
+      <div class="product-content">
+        <h3 class="sub" x-text="item.name"></h3>
+        <div class="product-price"><span x-text="rupiah(item.price)"></span></div>
+      </div>
+    </div>
+    
+  </template>
+</div>
+<template x-for="(item, index) in items" x-bind:key="index">
+ <!-- Modal Box Item Detail start -->
+ <div class="modal" x-show="showModal" id="item-detail-modal" > 
+  <div class="modal-container">
+    <a href="#" class="close-icon" @click.prevent="hideItemDetailModal"><i data-feather="x"></i></a>
+    <div class="modal-content">
+      <img :src="`img/${selectedItem.img}`" :alt="selectedItem.name">
+      <div class="product-content">
+        <h3 x-text="selectedItem.name"></h3>
+        <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Provident, tenetur cupiditate facilis obcaecati ullam maiores minima quos perspiciatis similique itaque, esse rerum eius repellendus voluptatibus!</p>
+        <div class="product-price"><span x-text="rupiah(selectedItem.price)"></span></div>
+        <a href="#" @click.prevent="$store.cart.add(selectedItem)"><i data-feather="shopping-cart"></i> <span>add to cart</span></a>
+      </div>
+    </div>
+  </div>
+</div>
+</template>
+<!-- Modal Box Item Detail end -->
+
+</section>
+
+<section id="about" class="container-xxl about">
+  <h2  class="judul"><span>Tentang</span> Kami</h2>
+  <div class="row">
+    <div class="about-img" >
+      <img  src="/image/logoku.png" alt="Tentang Kami">
+    </div>
+    <div class="isi" >
+      <h3 class="sub">Kenapa memilih  Toko kami?</h3>
+      <p class="paragraf">Selamat datang di toko Kfashion , Kami adalah destinasi utama bagi mereka yang mencari gaya terbaru dan tren fashion terkini. Dengan komitmen kami untuk menyediakan pakaian berkualitas tinggi dengan harga yang terjangkau, kami bangga menjadi salah satu tujuan favorit bagi para penggemar fashion. menyediakan berbagai fashion kekinian dan mulai harga yang terjangkau di kantong.</p>
+      <p class="paragraf">Jangan ragu untuk mengunjungi toko kami secara langsung atau melalui situs web kami untuk mengeksplorasi koleksi kami. Terlepas dari gaya atau preferensi Anda, kami yakin Anda akan menemukan sesuatu yang sesuai dengan selera Anda di sini. Terima kasih telah memilih kami sebagai destinasi belanja pakaian Anda. Kami berharap dapat memberikan pengalaman berbelanja yang memuaskan dan menyenangkan untuk Anda!</p>
+    </div>
+  </div>
+</section>
+
+<section class="media">
+<footer id="kontak">
+  <div class="socials" >
+    <a href="https://www.instagram.com/aliyudin_555/" target="_blank" ><svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <use href="img/feather-sprite.svg#instagram" />
+    </svg></a>
+    <a href="mailto:aliyudin@gmail.com"><svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <use href="img/feather-sprite.svg#mail" />
+    </svg></a>
+    <a href="https://github.com/Aliyudin555" target="_blank" ><svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <use href="img/feather-sprite.svg#github"/>
+    </svg></a>
+    <a href="https://www.youtube.com/channel/UCPZ_mttD-Yt2kyrRgbiaF6w" target="_blank" ><svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <use href="img/feather-sprite.svg#youtube" />
+    </svg></a>
+  </div>
+
+  <div class="links" >
+    <a href="#home">Home</a>
+    <a href="#products">Produk</a>
+    <a href="#about">Tentang kami</a>
+    <a href="#kontak">Kontak</a>
+  </div>
+
+  <div class="credit">
+    <p>Created by <a href="">Aliyudin</a>. | &copy; 2024.</p>
+  </div>
+</footer>
+</section>
+
+  <script src="script.js" defer></script>
+ <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script> 
+ <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+ <script>
+   AOS.init();
+ </script>
+ 
+</body>
+</html>
